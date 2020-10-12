@@ -1,7 +1,7 @@
 ---
 
 - debug:
-  msg: Stopping NR Infrastructure agent
+    msg: Stopping NR Infrastructure agent
 
 - name: supervisord stop service
   shell: systemctl stop newrelic-infra
