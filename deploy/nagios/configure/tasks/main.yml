@@ -1,0 +1,29 @@
+---
+
+# The following variables are optional
+#   tags: {"dxOwningTeam":"DemoX","dxEnvironment":"development",...} JSON list of tags    
+
+- debug:
+    msg: Configuring NR Nagios On-Host integration
+
+- block:
+  - name: create Nagios integration config file
+    template:
+        src: nagios-config.yml
+        dest: /etc/newrelic-infra/integrations.d/nagios-config.yml
+
+  - name: create Nagios service checks file
+    template:
+        src: service-checks.yml
+        dest: /etc/newrelic-infra/integrations.d/service-checks.yml
+
+  - name: Add tags header
+    lineinfile:
+        path: "/etc/newrelic-infra.yml"
+        line: "  {{item.key}}: {{item.value}}"
+        insertafter: 'custom_attributes:'
+    loop: "{{ (tags|default({}))|dict2items }}"
+    when: tags is defined
+    
+  become: yes   
+    
