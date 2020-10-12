@@ -7,15 +7,20 @@
     msg: Configuring NR Nagios On-Host integration
 
 - block:
-  - name: create Nagios integration config file
+  - name: Create Nagios integration config file
     template:
         src: nagios-config.yml
         dest: /etc/newrelic-infra/integrations.d/nagios-config.yml
 
-  - name: create Nagios service checks file
+  - name: Create Nagios service checks file
     template:
         src: service-checks.yml
         dest: /etc/newrelic-infra/integrations.d/service-checks.yml
+
+  - name: Create check_users service check
+    template:
+        src: check_users.yml
+        dest: /usr/local/nagios/libexec/check_users
 
   - name: Add tags header
     lineinfile:
