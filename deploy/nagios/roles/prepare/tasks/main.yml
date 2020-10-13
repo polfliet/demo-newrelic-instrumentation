@@ -17,32 +17,31 @@
     register: linux7
 
   - name: install default linux agent
-    yum:
-        
-        name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/6/x86_64/nri-nagios-{{ version }}-1.x86_64.rpm'
-        state: present
+    yum: 
+      name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/6/x86_64/nri-nagios-{{ version }}-1.x86_64.rpm'
+      state: present
     when: awslinux2.stdout|int == 0 and linux7.stdout|int == 0
     ignore_errors: yes
     register: result
 
   - name: install default linux agent alternate name
     yum:
-        name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/6/x86_64/nri-nagios-{{ version }}-1.el6.x86_64.rpm'
-        state: present
+      name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/6/x86_64/nri-nagios-{{ version }}-1.el6.x86_64.rpm'
+      state: present
     when: (awslinux2.stdout|int == 0 and linux7.stdout|int == 0) and result is failed
 
   - name: install linux 2 agent
     yum:
-        name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/nri-nagios-{{ version }}-1.x86_64.rpm'
-        state: present
+      name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/nri-nagios-{{ version }}-1.x86_64.rpm'
+      state: present
     when: awslinux2.stdout|int > 0 or linux7.stdout|int > 0
     ignore_errors: yes
     register: result
 
   - name: install linux 2 agent alternate name
     yum:
-        name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/nri-nagios-{{ version }}-1.el7.x86_64.rpm'
-        state: present
+      name: 'https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/nri-nagios-{{ version }}-1.el7.x86_64.rpm'
+      state: present
     when: (awslinux2.stdout|int > 0 or linux7.stdout|int > 0) and result is failed
 
   become: yes

@@ -9,24 +9,29 @@
 - block:
   - name: Create Nagios integration config file
     template:
-        src: nagios-config.yml
-        dest: /etc/newrelic-infra/integrations.d/nagios-config.yml
+      src: nagios-config.yml
+      dest: /etc/newrelic-infra/integrations.d/nagios-config.yml
 
   - name: Create Nagios service checks file
     template:
-        src: service-checks.yml
-        dest: /etc/newrelic-infra/integrations.d/service-checks.yml
+      src: service-checks.yml
+      dest: /etc/newrelic-infra/integrations.d/service-checks.yml
+
+  - name: Create Nagios service checks directory
+    file:
+      path: /usr/local/nagios/libexec/
+      state: directory
 
   - name: Create check_users service check
     template:
-        src: check_users
-        dest: /usr/local/nagios/libexec/check_users
+      src: check_users
+      dest: /usr/local/nagios/libexec/check_users
 
   - name: Add tags header
     lineinfile:
-        path: "/etc/newrelic-infra.yml"
-        line: "  {{item.key}}: {{item.value}}"
-        insertafter: 'custom_attributes:'
+      path: "/etc/newrelic-infra.yml"
+      line: "  {{item.key}}: {{item.value}}"
+      insertafter: 'custom_attributes:'
     loop: "{{ (tags|default({}))|dict2items }}"
     when: tags is defined
     
