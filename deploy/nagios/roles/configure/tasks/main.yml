@@ -16,6 +16,7 @@
     template:
       src: service-checks.yml
       dest: /etc/newrelic-infra/integrations.d/service-checks.yml
+      mode: 0600
 
   - name: Create Nagios service checks directory
     file:
