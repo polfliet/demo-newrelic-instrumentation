@@ -27,6 +27,7 @@
     template:
       src: check_users
       dest: /usr/local/nagios/libexec/check_users
+      mode: 0777
 
   - name: Add tags header
     lineinfile:
