@@ -19,7 +19,7 @@
 
   - name: Create check_users service check
     template:
-        src: check_users.yml
+        src: check_users
         dest: /usr/local/nagios/libexec/check_users
 
   - name: Add tags header
