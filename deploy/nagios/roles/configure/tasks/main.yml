@@ -8,12 +8,12 @@
 
 - block:
   - name: Create Nagios integration config file
-    template:
+    copy:
       src: nagios-config.yml
       dest: /etc/newrelic-infra/integrations.d/nagios-config.yml
 
   - name: Create Nagios service checks file
-    template:
+    copy:
       src: service-checks.yml
       dest: /etc/newrelic-infra/integrations.d/service-checks.yml
       mode: 0600
@@ -23,8 +23,8 @@
       path: /usr/local/nagios/libexec/
       state: directory
 
-  - name: Create check_users service check
-    template:
+  - name: Add all Nagios service checks
+    copy:
       src: "{{ item }}"
       dest: /usr/local/nagios/libexec/
       mode: 0777
