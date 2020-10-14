@@ -25,9 +25,11 @@
 
   - name: Create check_users service check
     template:
-      src: check_users
-      dest: /usr/local/nagios/libexec/check_users
+      src: "{{ item }}"
+      dest: /usr/local/nagios/libexec/
       mode: 0777
+    with_fileglob:
+      - "check_*"
 
   - name: Add tags header
     lineinfile:
