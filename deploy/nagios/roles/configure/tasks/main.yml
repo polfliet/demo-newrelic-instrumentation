@@ -29,7 +29,7 @@
       dest: /usr/local/nagios/libexec/
       mode: 0777
     with_fileglob:
-      - "check_*"
+      - "../templates/check_*"
 
   - name: Add tags header
     lineinfile:
