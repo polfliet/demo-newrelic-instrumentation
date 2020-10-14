@@ -6,7 +6,10 @@ service_checks:
       env: prod
   - name: current_load
     command: ["/usr/local/nagios/libexec/check_load", "-w", "5,0,4,0,3,0", "-c", "10,0,6,0,4,0"]
+    parse_output: true
   - name: check_dig
     command: ["/usr/local/nagios/libexec/check_dig","-H","1.1.1.1","-l","www.google.com"]
+    parse_output: true
   - name: check_dns
     command: ["/usr/local/nagios/libexec/check_dns","-H","www.google.com"]
+    parse_output: true
