@@ -9,12 +9,12 @@
 - block:
   - name: Create Nagios integration config file
     copy:
-      src: nagios-config.yml
+      src: ../templates/nagios-config.yml
       dest: /etc/newrelic-infra/integrations.d/nagios-config.yml
 
   - name: Create Nagios service checks file
     copy:
-      src: service-checks.yml
+      src: ../templates/service-checks.yml
       dest: /etc/newrelic-infra/integrations.d/service-checks.yml
       mode: 0600
 
